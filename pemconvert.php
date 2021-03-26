@@ -8,17 +8,18 @@ function getInformation($file)
     $data2 = openssl_x509_parse(openssl_x509_read($file));
     
 
-    //this line check subjectAltname
+    //this line will check Alternative host names
    if (is_null($data2["extensions"]["subjectAltName"]) ==false){
         $alternative_hosts = $data2["extensions"]["subjectAltName"];
+       //this line will split string by string and convert to array.
         $subjectAltname = explode(" ",$alternative_hosts );
     }
     else{
         $subjectAltname = "No alternative host name";
     }
     
-    //I get information from data2(data2 is array)
-
+   
+    //this like, will checek date of ssl
 
     if (date("Y-m-d H:i:s") <= date('Y-m-d H:i:s', $data2['validTo_time_t'])) {
         //echo "\n"."Not expired";
@@ -28,6 +29,7 @@ function getInformation($file)
         $sslDate = "SSL Expired" . " Valid To time: " . date('Y-m-d H:i:s', $data2['validTo_time_t']);
 
     }
+    
     $device_data = array(
 
         "host" => $data2["subject"]["CN"],
