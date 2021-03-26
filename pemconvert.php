@@ -9,13 +9,12 @@ function getInformation($file)
     
 
     //this line check subjectAltname
-    if (is_null($data2["extensions"]["subjectAltName"]) ==false){
-        
-        $subjectAltname = $data2["extensions"]["subjectAltName"];
+   if (is_null($data2["extensions"]["subjectAltName"]) ==false){
+        $alternative_hosts = $data2["extensions"]["subjectAltName"];
+        $subjectAltname = explode(" ",$alternative_hosts );
     }
     else{
-        
-        $subjectAltname = "No subjectAltName";
+        $subjectAltname = "No alternative host name";
     }
     
     //I get information from data2(data2 is array)
