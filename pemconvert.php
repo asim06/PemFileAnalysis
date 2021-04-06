@@ -17,7 +17,9 @@ function getInformation($file)
        //this line will delete "DNS:" so I used to offset 4.
         $i = 0;
         while ($i<count($subjectAltname)){
-             $subjectName[$i]= substr($subjectAltname[$i], 4, strlen($subjectAltname[$i]));
+             //this line will change : before double point to ""
+             $patern = "/.*:/";
+             $subjectName[$i] =preg_replace($patern,"",$subjectAltname[$i]);
              $i++;
         }
        $subjectAltname = $subjectName;        
