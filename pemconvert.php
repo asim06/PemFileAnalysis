@@ -12,7 +12,7 @@ function getInformation($file)
    if (is_null($data2["extensions"]["subjectAltName"]) ==false){
         $alternative_hosts = $data2["extensions"]["subjectAltName"];
        //this line will split string by string and convert to array.
-        $subjectAltname = explode(" ",$alternative_hosts );
+        $subjectAltname = explode(",",$alternative_hosts );
        
        //this line will delete "DNS:" so I used to offset 4.
         $i = 0;
